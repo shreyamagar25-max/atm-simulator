@@ -1,0 +1,175 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ATM Simulation System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <h2>ATM Simulation</h2>
+    <button id="logoutBtn" class="hidden" onclick="logout()">Logout</button>
+  </header>
+
+  <main class="container">
+
+    <!-- Welcome Screen -->
+    <section id="welcomeScreen" class="card">
+      <div class="atm-icon">₹</div>
+      <h1>Welcome to ATM</h1>
+      <p>Secure and simple banking simulation</p>
+      <button onclick="showLogin()">Get Started</button>
+    </section>
+
+    <!-- Login Screen -->
+    <section id="loginScreen" class="card hidden">
+      <h1>ATM Login</h1>
+      <p>Enter the demo account details</p>
+
+      <form id="loginForm">
+        <label for="accountNumber">Account Number</label>
+        <input
+          id="accountNumber"
+          type="text"
+          inputmode="numeric"
+          placeholder="Enter account number"
+          required
+        >
+
+        <label for="pin">PIN</label>
+        <input
+          id="pin"
+          type="password"
+          inputmode="numeric"
+          placeholder="Enter 4-digit PIN"
+          maxlength="4"
+          required
+        >
+
+        <p id="loginMessage" class="message" aria-live="polite"></p>
+        <button type="submit">Login</button>
+      </form>
+
+      <p class="demo-note">Demo account: 1234567890 | PIN: 1234</p>
+      <button class="secondary" onclick="showWelcome()">Back</button>
+    </section>
+
+    <!-- ATM Dashboard -->
+    <section id="dashboardScreen" class="hidden">
+      <div class="card">
+        <p>Welcome, Demo User</p>
+        <p>Available Balance</p>
+        <h1 id="balance">₹10,000.00</h1>
+      </div>
+
+      <div class="menu-grid">
+        <button onclick="showSection('depositSection')">
+          Deposit Money
+        </button>
+        <button onclick="showSection('withdrawSection')">
+          Withdraw Money
+        </button>
+        <button onclick="showSection('historySection')">
+          Transaction History
+        </button>
+        <button onclick="showSection('pinSection')">
+          Change PIN
+        </button>
+      </div>
+
+      <section id="depositSection" class="card hidden">
+        <h2>Deposit Money</h2>
+        <form id="depositForm">
+          <label for="depositAmount">Amount (₹)</label>
+          <input id="depositAmount" type="number" min="1"
+                 step="0.01" placeholder="Enter amount" required>
+          <button type="submit">Deposit</button>
+        </form>
+        <p id="depositMessage" class="message" aria-live="polite"></p>
+        <button class="secondary" onclick="showDashboard()">Back to Dashboard</button>
+      </section>
+
+      <section id="withdrawSection" class="card hidden">
+        <h2>Withdraw Money</h2>
+        <form id="withdrawForm">
+          <label for="withdrawAmount">Amount (₹)</label>
+          <input id="withdrawAmount" type="number" min="1"
+                 step="0.01" placeholder="Enter amount" required>
+          <button type="submit">Withdraw</button>
+        </form>
+        <p id="withdrawMessage" class="message" aria-live="polite"></p>
+        <button class="secondary" onclick="showDashboard()">Back to Dashboard</button>
+      </section>
+
+      <section id="historySection" class="card hidden">
+        
+
+        <h2>Transaction History</h2>
+        
+<div class="search-row">
+  <input type="text" id="searchTransaction"
+         placeholder="Search transactions">
+
+  <button type="button" onclick="searchTransactions()">
+    Search
+  </button>
+
+  <button type="button" class="secondary"
+          onclick="displayTransactions()">
+    SHOW ALL
+    
+  </button>
+  
+    <button type="button" onclick="sortTransactions()">
+      Sort by Amount
+    </button>
+    
+</div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Date & Time</th>
+                <th>Balance After</th>
+              </tr>
+            </thead>
+            <tbody id="transactionList"></tbody>
+          </table>
+        </div>
+        <p id="emptyHistory">No transactions yet.</p>
+        <button class="secondary" onclick="showDashboard()">Back to Dashboard</button>
+      </section>
+
+      <section id="pinSection" class="card hidden">
+        <h2>Change PIN</h2>
+        <form id="pinForm">
+          <label for="currentPin">Current PIN</label>
+          <input id="currentPin" type="password" maxlength="4"
+                 inputmode="numeric" required>
+
+          <label for="newPin">New 4-digit PIN</label>
+          <input id="newPin" type="password" maxlength="4"
+                 inputmode="numeric" required>
+
+          <button type="submit">Change PIN</button>
+        </form>
+        <p id="pinMessage" class="message" aria-live="polite"></p>
+        <button class="secondary" onclick="showDashboard()">Back to Dashboard</button>
+      </section>
+
+    </section>
+  </main>
+
+  <footer>
+    <p>Educational DSA Project | Demo only — not a real banking service</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
